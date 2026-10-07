@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>TRACE RACE — Blackbox Arcade</title>
+<title>TRACE RACE - Blackbox Arcade</title>
 <style>
   :root{
     --bg:#0a0a12;
@@ -93,12 +93,12 @@
     <div id="status">Draw the shape in one stroke</div>
     <button id="nextBtn" class="primary hidden">Next shape &rarr;</button>
   </div>
-  <footer><span class="scorehow">Score: your trace is resized to match the ghost, then compared point by point. 100 is perfect &mdash; starting anywhere on the loop is fine. Draw fast for bonus points.</span></footer>
+  <footer><span class="scorehow">Score: your trace is resized to match the ghost, then compared point by point. 100 is perfect. Starting anywhere on the loop is fine. Draw fast for bonus points.</span></footer>
 </div>
 
 <div id="title" class="overlay">
   <h1>TRACE RACE</h1>
-  <p class="how">5 rounds. Each round shows a ghost shape &mdash; redraw it in <b>one</b> stroke. Closest trace wins.</p>
+  <p class="how">5 rounds. Each round shows a shape. Redraw it in <b>one</b> stroke. Closest trace wins.</p>
   <div class="bestline" id="challengeLbl"></div>
   <div class="bestline" id="titleBest"></div>
   <button id="startBtn" class="primary">Start</button>
@@ -731,7 +731,7 @@ function lockInStroke(){
     length += Math.hypot(game.raw[i][0] - game.raw[i-1][0], game.raw[i][1] - game.raw[i-1][1]);
   }
   if(game.raw.length < 3 || length < 60){
-    statusEl.textContent = 'Too short — draw a bigger loop';
+    statusEl.textContent = 'Too short. Draw a bigger loop';
     game.raw = [];
     return;
   }
@@ -1039,7 +1039,7 @@ function endStroke(e){
   hideMag();
   game.strokeSecs = game.strokeStart ? (Date.now() - game.strokeStart) / 1000 : 0;
   if(e.type === 'pointercancel' || e.type === 'lostpointercapture'){
-    statusEl.textContent = 'Interrupted — draw the ' + game.shapeLabel + ' again';
+    statusEl.textContent = 'Interrupted. Draw the ' + game.shapeLabel + ' again';
     game.raw = [];
     return;
   }
@@ -1094,9 +1094,9 @@ document.getElementById('shareBtn').addEventListener('click', function(){
   var msg = document.getElementById('postMsg');
   var code = encodeOrder(game.order);
   var url = challengeURL('c' + code);
-  var nm = playerName() || 'Host';
+  var nm = playerName() || 'Your friend';
   function go(){
-    shareLink(url, msg, 'Room ' + code + ' shared — your ' + game.total + ' is waiting in it.');
+    shareLink(url, msg, 'Room ' + code + ' shared. Your ' + game.total + ' is waiting in it.');
   }
   if(!game.sharedToRoom && game.scores.length === 5){
     game.sharedToRoom = true;
@@ -1121,7 +1121,7 @@ document.getElementById('shareBtn').addEventListener('click', function(){
     btn.textContent = 'Share room';
     btn.addEventListener('click', function(){
       var lbl = document.getElementById('challengeLbl');
-      shareLink(challengeURL(CH.id), lbl, 'Room shared — send it to a friend.');
+      shareLink(challengeURL(CH.id), lbl, 'Room shared. Send it to a friend.');
       setTimeout(function(){
         lbl.innerHTML = 'Friend challenge<br><span id="codeBig">' + escHtml(CH.id.slice(1)) + '</span>';
       }, 4000);
